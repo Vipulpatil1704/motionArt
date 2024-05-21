@@ -1,0 +1,14 @@
+/*
+Two ways of centering :-
+1. margin:auto
+2. text-align:center
+
+align 
+margin-left:auto
+*/
+
+/*
+ If there are three cards adjacent in a container to each other and suppose content in one card is more than two cards then if we minizing then height of thrid card will gets increases more than others making it inconsistent design 
+
+ =>To solve this issue make sure that height of each card should be set to 100% of parent contianer so that each card will take same height and even in case of one card height increase due to more content collapse then height of all three cards will increase by same.
+*/

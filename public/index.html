@@ -2,42 +2,124 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <meta
       name="description"
       content="Web site created using create-react-app"
     />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
-
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>React App</title>
+    <style>
+      .lightning-cursor {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background-color: transparent;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        opacity: 0;
+        z-index: 10000;
+        user-select: none;
+        pointer-events: none;
+      }
+      body{
+        overflow: hidden;
+      }
+      #root{
+        height:100vh;
+        overflow-y: scroll;
+      }
+    </style>
+    <!--Gsap-->
+    <script src="https://kit.fontawesome.com/202d73839d.js" crossorigin="anonymous"></script>
+    <title>Motion Art</title>
   </head>
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
+      <div id="root">
+      </div>
+      <div class="lightning-cursor"></div>
+      <script>
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
+    const cursor = document.querySelector('.lightning-cursor');
+    function getRandomColor() {
+      const letters = '0123456789ABCDEF';
+      let color = '#';
+      for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+      }
+      return color;
+    }
 
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
-  </body>
+    document.addEventListener('pointermove', (e) => {
+      const x = e.clientX + window.scrollX;
+      const y = e.clientY + window.scrollY;
+
+      gsap.to(cursor, {
+        duration: 0.5,
+        x: x,
+        y: y,
+        ease: 'power1.out',
+        overwrite: 'auto',
+        opacity: 1,
+        scale: 1.5,
+        transformOrigin: 'center',
+        onComplete: () => {
+          gsap.to(cursor, {
+            duration: 0.5,
+            scale: 1,
+            ease: 'power1.out',
+            overwrite: 'auto',
+            opacity: 0,
+            transformOrigin: 'center',
+            delay: 0.1,
+          });
+        },
+      });
+
+      const numPoints = 10;
+      const angleIncrement = (Math.PI * 2) / numPoints;
+      const radius = 100;
+      let viewportHeight = window.innerHeight;
+      for (let i = 0; i < numPoints; i++) 
+      {
+        const angle = i * angleIncrement;
+
+        const x2 = x + Math.cos(angle) * radius;
+        const y2 = y + Math.sin(angle) * radius;
+        const color = getRandomColor();
+        const point = document.createElement('span');
+        point.style.left = x2 + 'px';
+        point.style.top = y2 + 'px';
+        point.style.width = '50px';
+        point.style.height = '50px';
+        point.style.background = color;
+        point.style.position = 'absolute';
+        point.style.borderRadius = '50%';
+        point.style.pointerEvents = 'none';
+        point.style.transform = 'translate(-50%, -50%)';
+        point.style.opacity = '0.2';
+        point.style.filter = 'blur(20px)';
+        point.style.boxShadow = `0 0 30px ${color}`;
+
+        document.body.appendChild(point);
+
+        gsap.to(point, {
+          duration: 0.5,
+          x: x2 + Math.random() * 20 - 10,
+          y: y2 + Math.random() * 20 - 10,
+          ease: 'power1.out',
+          overwrite: 'auto',
+          opacity: 0,
+          delay: Math.random() * 0.5,
+          onComplete: () => {
+            document.body.removeChild(point);
+          },
+        });
+      }
+    });
+    
+    </script>
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
+    </body>
 </html>
