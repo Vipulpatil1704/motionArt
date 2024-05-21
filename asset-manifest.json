@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/motionArt/static/css/main.270545b0.css",
+    "main.js": "/motionArt/static/js/main.2de0890e.js",
+    "index.html": "/motionArt/index.html",
+    "main.270545b0.css.map": "/motionArt/static/css/main.270545b0.css.map",
+    "main.2de0890e.js.map": "/motionArt/static/js/main.2de0890e.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.270545b0.css",
+    "static/js/main.2de0890e.js"
+  ]
+}
