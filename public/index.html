@@ -2,12 +2,11 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <meta
       name="description"
-      content="Web site created using create-react-app"
-    />
+      content="Web site created using create-react-app" />
     <style>
       .lightning-cursor {
         position: fixed;
@@ -32,17 +31,17 @@
       }
     </style>
     <!--Gsap-->
-    <script src="https://kit.fontawesome.com/202d73839d.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/202d73839d.js"
+      crossorigin="anonymous"></script>
     <title>Motion Art</title>
   </head>
   <body>
-      <div id="root">
-      </div>
-      <div class="lightning-cursor"></div>
-      <script>
+    <div id="root">
+    </div>
+    <div class="lightning-cursor"></div>
+    <script>
 
         const cursor = document.querySelector('.lightning-cursor');
-
         function getRandomColor() {
           const letters = '0123456789ABCDEF';
           let color = '#';
@@ -78,41 +77,37 @@
             },
           });
     
-          const numPoints = 10;
+          const numPoints =10;
           const angleIncrement = (Math.PI * 2) / numPoints;
           const radius = 100;
-    
-          for (let i = 0; i < numPoints; i++) {
+          let viewportHeight = window.innerHeight;
+          for (let i = 0; i < numPoints; i++) 
+          {
             const angle = i * angleIncrement;
+    
             const x2 = x + Math.cos(angle) * radius;
             const y2 = y + Math.sin(angle) * radius;
             const color = getRandomColor();
-    
             const point = document.createElement('span');
             point.style.left = x2 + 'px';
             point.style.top = y2 + 'px';
             point.style.width = '50px';
             point.style.height = '50px';
+            point.style.background = color;
             point.style.position = 'absolute';
-            point.style.pointerEvents = 'none';
             point.style.borderRadius = '50%';
+            point.style.pointerEvents = 'none';
             point.style.transform = 'translate(-50%, -50%)';
-            point.style.background = 'transparent';
-            point.style.boxShadow = `
-              0 0 30px ${color},
-              0 0 60px ${color},
-              0 0 90px ${color},
-              0 0 120px ${color}
-            `;
-            point.style.opacity = '0.4';
-            point.style.filter = 'blur(30px)';
+            point.style.opacity = '0.2';
+            point.style.filter = 'blur(20px)';
+            point.style.boxShadow = `0 0 30px ${color}`;
     
             document.body.appendChild(point);
     
             gsap.to(point, {
-              duration: 1.5,
-              x: x2 + Math.random() * 40 - 20,
-              y: y2 + Math.random() * 40 - 20,
+              duration: 0.5,
+              x: x2 + Math.random() * 20 - 10,
+              y: y2 + Math.random() * 20 - 10,
               ease: 'power1.out',
               overwrite: 'auto',
               opacity: 0,
@@ -123,8 +118,9 @@
             });
           }
         });
-    
-    </script>
-       <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
-    </body>
+        
+        </script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
+  </body>
 </html>
