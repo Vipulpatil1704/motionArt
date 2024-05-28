@@ -12,21 +12,6 @@ margin-left:auto
 
  =>To solve this issue make sure that height of each card should be set to 100% of parent contianer so that each card will take same height and even in case of one card height increase due to more content collapse then height of all three cards will increase by same.
 */
-.particle {
-    width: 10px;
-    height: 10px;
-    background-color: #fff;
-    border-radius: 50%;
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-  
-  .particle-container {
-    position: relative;
-    width: 100%;
-    height: 100vh;
-  }
 body{
     overflow-x:hidden;
 }
